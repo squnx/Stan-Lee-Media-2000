@@ -1,0 +1,163 @@
+<html>
+
+<?
+if(isset($snifferCookie)){
+	$cookieVars = split(":",$snifferCookie);
+	$version = $cookieVars[0];
+	$flash = $cookieVars[1];
+	$sniffed = $cookieVars[2];
+	$nonMac="";
+	if($version > 0){
+		$nonMac="<br>";
+	}
+
+}
+if($sniffed != "true"){
+	print("
+		<html>
+		<head><title></title>
+		<script language='javascript'>
+				var version = 0;
+				var flash = false;
+				var sniffed = true;
+		    	var useFlash = navigator.mimeTypes && navigator.mimeTypes['application/x-shockwave-flash'] && navigator.mimeTypes['application/x-shockwave-flash'].enabledPlugin;
+		    	function submitSniff(){
+
+					document.location = \"$PHP_SELF\";
+				}
+
+				function setFlash(){
+					if(useFlash){
+						flash = \"true\";
+					}else{
+						flash = \"false\";
+					}
+				}
+				function setCookie(){
+					version = ((navigator.appVersion == \"4.0 (compatible; MSIE 4.5; Macintosh; U; PPC)\" || navigator.appVersion == \"4.0 (compatible; MSIE 4.5; Macintosh; I; PPC)\")) ? 0 : parseFloat(navigator.appVersion);
+					setFlash();
+					cookieString = (\"snifferCookie=\"+version+\":\"+flash+\":\"+sniffed);
+					document.cookie = cookieString;
+				}
+
+		</script>
+
+		<SCRIPT LANGUAGE='VBScript'>
+			On error resume next
+			useFlash = NOT IsNull(CreateObject(\"ShockwaveFlash.ShockwaveFlash\"))
+		</SCRIPT>
+
+
+		</head>
+		<body bgcolor='#003399' onLoad='setFlash();setCookie();submitSniff()'>
+
+	</body></html>");
+}
+
+if(($sniffed == "true") && ($version < 4)){
+	print("
+	<html>
+		<head>
+		<title>stanlee.net - Upgrade your browser</title>
+		<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">
+		<link rel=\"stylesheet\" href=\"sniff.css\" type=\"text/css\">
+		</head>
+		<body bgcolor=\"#003399\" text='#ffffff' BACKGROUND=\"images/bg_gradient.jpg\">
+		<center>
+		<br>
+		<br>
+		<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"480\">
+		<tr>
+		<td align=\"left\" valign=\"top\"><img src=\"images/snif_a1_240x59.jpg\" width=\"240\" height=\"59\"><br>
+		<img src=\"images/snif_a2_240x184.jpg\" width=\"240\" height=\"184\"><br>
+		<img src=\"images/snif_a3_240x107.jpg\" width=\"240\" height=\"107\"></td>
+		<td valign=\"top\" align=\"left\"><img src=\"images/snif_b1top_240x23.jpg\" width=\"240\" height=\"23\">$nonMac<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"240\">
+		<tr>
+		<td width=\"17\"><img src=\"images/snif_b1left_17x125.jpg\" width=\"17\" height=\"125\"></td>
+		<td width=\"198\" background=\"images/snif_b1bg198x4.jpg\" bgcolor=\"#000066\" align=\"left\" valign=\"top\"><img src=\"images/snif_alert70x13.gif\" width=\"70\" height=\"13\"><font class=\"maintext\"><br>
+		<font size=\"1\" color=\"#FFFFFF\" face=\"arial,helvetica,sans-serif\"> You need a version 4.0 or later web browser to experience the exciting games, webisodes, and activities at &nbsp;<i><b>stanlee.net. </b></i>  If you're using Internet Explorer for Macintosh, you need to upgrade to version 5.  Please use the buttons below to download the latest version of your browser.</font></td>
+		<td width=\"25\"><img src=\"images/snif_b1right_25x125.jpg\" width=\"25\" height=\"125\"></td>
+		</tr>
+		</table><img src=\"images/snif_b1bot_240x14.jpg\" width=\"240\" height=\"14\"><br><img src=\"images/snif_b2top240x5.gif\" width=\"240\" height=\"5\">$nonMac<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"240\">
+		<tr>
+		<td width=\"15\" valign=\"top\"><img src=\"images/snif_b2left15x69.gif\" width=\"15\" height=\"69\"></td>
+		<td valign=\"top\" width=\"203\"><a href=\"http://www.microsoft.com/downloads/\"><img src=\"images/snif_b2_msie203x30.gif\" width=\"203\" height=\"30\" alt=\"Miscrosoft Internet Explorer\" border=\"0\"></a><br>
+		<img src=\"images/snif_b2mid203x9.gif\" width=\"203\" height=\"9\"><br>
+		<a href=\"http://home.netscape.com/computing/download/index.html\"><img src=\"images/snif_b2_nn203x30.gif\" width=\"203\" height=\"30\" border=\"0\" alt=\"Netscape Navigator\"></a></td>
+		<td valign=\"top\" width=\"22\"><img src=\"images/snif_b2right22x69.gif\" width=\"22\" height=\"69\"></td>
+		</tr>
+		</table><img src=\"images/snif_b2bot240x7.gif\" width=\"240\" height=\"7\"><br><img src=\"images/sniffer_b3_240x107.gif\" width=\"240\" height=\"107\"></td>
+		</tr>
+		</table>
+		<br>
+		<div class=\"text1\"><font face=\"arial,helvetica,sans-serif\" size=\"2\"><center>");
+
+			include("include/sniffer_bottom.inc");
+
+			print("</center></font></div>
+		</center>
+		</body>
+		</html>
+	");
+
+}
+
+
+if(($sniffed == "true") && ($version >= 4) && ($flash == "false")){
+	print("
+		<html>
+		<head>
+		<title>stanlee.net - Download Flash 4</title>
+		<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">
+		<link rel=\"stylesheet\" href=\"sniff.css\" type=\"text/css\">
+		</head>
+			<body bgcolor=\"#003399\" BACKGROUND=\"images/bg_gradient.jpg\" text=\"#FFFFFF\">
+		<center>
+		<br>
+		<br>
+		<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"480\">
+		<tr>
+		<td align=\"left\" valign=\"top\"><img src=\"images/snif_a1_240x59.jpg\" width=\"240\" height=\"59\"><br>
+		<img src=\"images/snif_a2_240x184.jpg\" width=\"240\" height=\"184\"><br>
+		<img src=\"images/snif_a3_240x107.jpg\" width=\"240\" height=\"107\"></td>
+		<td valign=\"top\" align=\"left\"><img src=\"images/snif_b1top_240x23.jpg\" width=\"240\" height=\"23\">$nonMac<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"240\">
+		<tr>
+		<td width=\"17\"><img src=\"images/snif_b1left_17x125.jpg\" width=\"17\" height=\"125\"></td>
+		<td width=\"198\" background=\"images/snif_b1bg198x4.jpg\" align=\"left\" valign=\"top\"><img src=\"images/snif_alert70x13.gif\" width=\"70\" height=\"13\"><font face=\"arial, helvetica, sans-serif\" size=\"1\"class=\"maintext\"><br>
+		<br>
+		You need the Macromedia<br><b>Flash 4<sup>TM</sup> Player</b>  to experience the exciting games, webisodes, and activities at <i><b>stanlee.net</b></i>. Please use the button below to download the plug-in. </font></td>
+			<td width=\"25\"><img src=\"images/snif_b1right_25x125.jpg\" width=\"25\" height=\"125\"></td>
+			</tr>
+			</table>
+		<img src=\"images/snif_b1bot_240x14.jpg\" width=\"240\" height=\"14\"><br>
+			<img src=\"images/snif2_b2top2_240x5.jpg\" width=\"240\" height=\"5\">$nonMac<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"240\">
+			<tr>
+			<td width=\"15\" valign=\"top\"><img src=\"images/snif_b2left2_15x69.jpg\" width=\"15\" height=\"69\"></td>
+			<td valign=\"top\" width=\"203\"><img src=\"images/snif_b2_top2_203x19.jpg\" width=\"203\" height=\"19\"><br>
+			<a href=\"http://sdc.shockwave.com/shockwave/download/\"><img src=\"images/snif_b2flash203x30.gif\" width=\"203\" height=\"30\" border=\"0\" alt=\"Macromedia Flash 4 Player\"></a><br>
+			<img src=\"images/snif_b2_bot2_203x20.jpg\" width=\"203\" height=\"20\"></td>
+			<td valign=\"top\" width=\"22\"><img src=\"images/snif_b2right2_22x69.jpg\" width=\"22\" height=\"69\"></td>
+			</tr>
+			</table>
+			<img src=\"images/snif_b2bot240x7.jpg\" width=\"240\" height=\"7\"><br>
+			<img src=\"images/sniffer_b3_240x107.gif\" width=\"240\" height=\"107\"></td>
+			</tr>
+			</table><br><font face=\"arial,helvetica,sans-serif\" size=\"2\">");
+
+			include("include/sniffer_bottom.inc");
+
+		print("</font>
+			</center>
+			</body>
+			</html>
+	");
+}
+
+
+if(($sniffed == "true") && ($version >= 4) && ($flash == "true")){
+
+	include("home.html");
+
+}
+
+?>
